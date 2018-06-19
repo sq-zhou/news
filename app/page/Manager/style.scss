@@ -1,0 +1,21 @@
+.manager {
+    max-width: 1014px;
+    width: auto;
+    margin: 0 auto;
+    padding: 0 18px;
+    .head-title {
+        width: 100%;
+        padding: 0.5rem 0 0.2rem;
+        font-size: 26px;
+    }
+    .manager-warpper {
+        .manager-left {
+            float: left;
+            width: 300px;
+        }
+        .manager-right {
+            margin-left: 300px;
+            padding: 0 10px;
+        }
+    }
+}

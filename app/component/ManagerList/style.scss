@@ -1,0 +1,11 @@
+.manager-list {
+    position: relative;
+    .vertical-line {
+        position: absolute;
+        left: -0.4rem;
+        top: 8px;
+        bottom: 0.5rem;
+        width: 1px;
+        background-color: #6b6b6b;
+    }
+}

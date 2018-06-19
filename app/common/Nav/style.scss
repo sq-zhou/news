@@ -1,0 +1,22 @@
+.Nav {
+    margin: 0 auto;
+    max-width: 1024px;
+    text-align: center;
+    background: #ffffff;
+
+    .top-title {
+        padding: 0.5rem 0 0.3rem;
+    }
+    
+    .menu {
+        padding: 0 0 0.1rem 0;
+        .item {
+            display: inline-block;
+            margin: 0 0.2rem;
+            font-size: 15px;
+            font-weight: 600;
+        }
+    }
+}
+
+

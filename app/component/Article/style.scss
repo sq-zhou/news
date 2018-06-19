@@ -1,0 +1,28 @@
+.article {
+    .text {
+        padding: 0.1rem 0;
+        border-bottom: 1px solid #d2d0d0;
+    }
+    .submit {
+        .submit-text {
+            margin: 8px 0;
+            width: 100%;
+            height: 150px;
+            border-radius: 6px;
+            padding: 8px 8px;
+            outline: none;
+        }
+        .submit-button {
+            float: right;
+            margin: 5px 2px 0 0;
+            width: 68px;
+            height: 28px;
+            line-height: 28px;
+            text-align: center;
+            border: 1px solid #aaaaaa;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+    }
+}

@@ -1,0 +1,28 @@
+.news-content-wrapper {
+    margin: 0 auto;
+    padding: 0.2rem 0.2rem;
+    max-width: 1024px;
+    overflow: hidden;
+    background: #ffffff;
+    border-radius: 3px;
+}
+
+.news-content-left {
+    width: auto;
+    margin-right: 380px;
+}
+
+.news-content-right {
+    float: right;
+    width: auto;
+    width: 380px;
+}
+
+@media (max-width:840px) {
+    .news-content-left {
+        margin-right: 0;
+    }
+    .news-content-right {
+        display: none;
+    }
+}
