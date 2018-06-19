@@ -6,13 +6,13 @@ const webpackFile = require("./webpack.file.conf");
 let config = {
     mode: 'development',
     entry: {
-        'index': './app/index.js'
+        index: path.join(__dirname, '../src/client/index.js'),
     },
     resolve: {
         extensions: [".js", ".json", ".jsx", ".css", ".pcss", "sass"],
     },
     output: {
-        path: __dirname + "../dev",
+        path: path.join(__dirname + "../dev"),
         filename: 'js/[name].js',
         chunkFilename: "js/[name].js",
         publicPath: ''
@@ -52,7 +52,7 @@ let config = {
                     'babel-loader',
                 ],
                 include: [
-                    path.resolve(__dirname, "../app")
+                    path.resolve(__dirname, "../src/client")
                 ],
                 exclude: [
                     path.resolve(__dirname, "../node_modules")
@@ -81,15 +81,8 @@ let config = {
         contentBase: path.resolve(webpackFile.devDirectory),
         historyApiFallback: true,
         disableHostCheck: true,
-        proxy: [
-            {
-                context: ['/api/**', '/u/**'],
-                target: 'http://192.168.12.100:8080/',
-                secure: false
-            }
-        ],
-        after() {
-            opn('http://localhost:' + this.port);
+        proxy: {
+            '/api': 'http://localhost:3000',
         }
     }
 };
