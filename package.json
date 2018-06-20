@@ -21,6 +21,7 @@
     "file-loader": "1.1.11",
     "html-webpack-plugin": "3.1.0",
     "node-sass": "^4.9.0",
+    "nodemon": "^1.17.5",
     "optimize-css-assets-webpack-plugin": "4.0.0",
     "postcss-loader": "^2.1.5",
     "react": "^16.4.0",
@@ -42,6 +43,7 @@
   "devDependencies": {},
   "scripts": {
     "dev": "webpack-dev-server --devtool eval --progress --colors --profile --config config/webpack.dev.conf.js",
+    "server": "nodemon src/server/index.js",
     "build": "SET BABEL_ENV=production && webpack --progress --colors --config config/webpack.prod.conf.js"
   },
   "author": "sq-zhou",
