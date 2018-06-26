@@ -21,8 +21,14 @@ app.get('/api/getUsername', (req, res) =>
 );
 
 app.get('/api/news', async (req, res) => {
-    const collection =  await News.find();
-    res.send(collection);
+    const id = req.param('id');
+    if (_.isUndefined(id)) {
+        const collection =  await News.find();
+        return res.send(collection);
+    }
+
+    const item = await News.findById(id);
+    res.send(item);
 });
 
 app.listen(3000, () =>
