@@ -1,12 +1,30 @@
 const mongoose = require('mongoose');
 
 const NewsScheme = mongoose.Schema({
-  title: String,
-  abstract: String,
-  figure: String,
-  content: String,
-  date: Date,
-  link: String,
+  title: {
+    type: String,
+    required: true,
+  },
+  abstract: {
+    type: String,
+    required: true,
+  },
+  figure: {
+    type: String,
+    required: true,
+  },
+  content: {
+    type: String,
+    required: true,
+  },
+  date: {
+    type: Date,
+    required: true,
+  },
+  link: {
+    type: String,
+    required: true,
+  },
 });
 
 const News = mongoose.model('news', NewsScheme);

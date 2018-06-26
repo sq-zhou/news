@@ -1,24 +1,27 @@
 const express = require('express');
 const os = require('os');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');''
 const _ = require('lodash');
+const assert = require('assert');
 
-const { News } = require('./models');
+const {
+    News,
+    Comment,
+    User,
+} = require('./models');
 
 mongoose.connect('mongodb://localhost/news');
 
 const app = express();
 
 app.use(express.static('dist'));
+app.use(bodyParser.json())
 
 app.use(function(req, res, next) {
   req.db = mongoose.connection;
   next();
 });
-
-app.get('/api/getUsername', (req, res) =>
-  res.send({ username: os.userInfo().username })
-);
 
 app.get('/api/news', async (req, res) => {
     const id = req.param('id');
@@ -29,6 +32,38 @@ app.get('/api/news', async (req, res) => {
 
     const item = await News.findById(id);
     res.send(item);
+});
+
+app.get('/api/comment', async (req, res) => {
+    const {
+        newsId,
+        id: commentId,
+    } = req.query;
+
+    if (!_.isUndefined(commentId)) {
+        const item = await Comment.findById(commentId);
+        return res.send(item);
+    }
+
+    if (!_.isUndefined(newsId)) {
+        const collection = await Comment.find({ newsId });
+        return res.send(collection);
+    }
+
+    return res.status(404).send({
+        error: "Please provide id or newsId",
+    });
+});
+
+app.post('/api/comment', async (req, res) => {
+    const { body } = req;
+    await Comment.create({
+        ...body,
+        date: new Date(),
+    });
+    return res.status(200).send({
+        message: 'success',
+    });
 });
 
 app.listen(3000, () =>

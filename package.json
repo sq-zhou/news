@@ -12,6 +12,7 @@
     "babel-preset-es2015-loose": "^8.0.0",
     "babel-preset-react": "6.24.1",
     "babel-preset-react-hmre": "1.1.1",
+    "body-parser": "^1.18.3",
     "cache-loader": "^1.2.2",
     "cheerio": "^1.0.0-rc.2",
     "clean-webpack-plugin": "0.1.19",
