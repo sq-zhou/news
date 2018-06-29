@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'C:/Users/Administrator.BF-201701130007/AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/react'
 import EventListNode from '../EventListNode/EventListNode'
 
 import './style.scss'

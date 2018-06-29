@@ -6,7 +6,7 @@ const cors = require('cors')
 const _ = require('lodash');
 const assert = require('assert');
 
-const frontendHost = ['http://localhost:8080']
+const frontendHost = 'http://localhost:8080'
 const corsConfig = {
     origin: function (origin, callback) {
         if (frontendHost.indexOf(origin) !== -1) {
