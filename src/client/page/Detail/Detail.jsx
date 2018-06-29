@@ -1,7 +1,7 @@
 import React from 'react';
-import Nav from '../../common/Nav/Nav.jsx';
+import Nav from '../../component/Common/Nav/Nav.jsx';
 import Article from '../../component/Article/Article.jsx';
-import SideBar from '../../common/SideBar/SideBar.jsx';
+import SideBar from '../../component/Common/SideBar/SideBar.jsx';
 
 import '../../assets/css/style.css'
 import '../../assets/css/common.css'

@@ -9,9 +9,9 @@
     .side-img {
         display: inline-block;
         vertical-align: top;
-        padding: 10px 0 0 0;
+        padding: 20px 0 0 0;
         width: 40%;
-        height: 190px;
+        height: 100%;
     }
     .side-content {
         display: inline-block;
@@ -28,14 +28,21 @@
             font-weight: 600;
         }
         .side-p {
+            height: auto;
+            max-height: 110px;
             margin: 5px 0;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 5;
+            overflow: hidden;
         }
         .tip {
-            margin: 10px 0;
             .tip-item {
                 padding: 0 0.15rem 0 0;
-                color: #7d7d7d;
                 font-size: 13px;
+                a {
+                    color: #7d7d7d;
+                }
             }
         }
     }
