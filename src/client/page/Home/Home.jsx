@@ -34,7 +34,7 @@ export default class Index extends React.Component {
                 <Nav />
                 <div className="news-content-wrapper">
                     <div className="news-content-right">
-                        <SideBar />
+                        <SideBar sideBarList={newsList}/>
                     </div>
                     <div className="news-content-left">
                         <Main newsList={newsList} />

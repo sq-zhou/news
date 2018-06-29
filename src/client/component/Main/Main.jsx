@@ -11,7 +11,10 @@ export default class Main extends React.Component {
                 <div className="event-node-wrapper" key={key}>
                     <EventListNode new={value} />
                 </div>
-            ))
+            ));
+            while (nodeList.length > 5) {
+                nodeList.pop();
+            }
         }
 
         return (

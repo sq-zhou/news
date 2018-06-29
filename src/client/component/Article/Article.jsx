@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
+import EventListNode from '../../component/Common/EventListNode/EventListNode'
 import New from '../New/New.jsx';
 
 import './style.scss'
@@ -8,20 +9,13 @@ const input = "``` Javascript var React = require('react'); var Markdown = requi
 
 export default class Article extends React.Component {
     render() {
+        console.log(this.props.newObj)
         return (
             <div className="article">
                 <div className="text">
-                    <ReactMarkdown source={input} />
+                    {this.props.newObj ? <EventListNode new={this.props.newObj} /> : null}
                 </div>
                 <div>
-                    <New />
-                    <New />
-                    <New />
-                    <New />
-                    <New />
-                    <New />
-                    <New />
-                    <New />
                 </div>
                 <div className="submit">
                     <textarea className="submit-text"></textarea>

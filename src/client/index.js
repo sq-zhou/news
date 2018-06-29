@@ -9,7 +9,7 @@ ReactDOM.render(
     <Router>
         <div>
             <Route exact path="/" component={Home} />
-            <Route path="/detail" component={Detail} />
+            <Route path="/detail/:_id" component={Detail} />
             <Route path="/manager" component={Manager} />
         </div>
     </Router>

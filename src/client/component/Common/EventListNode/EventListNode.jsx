@@ -4,12 +4,10 @@ import { Link } from 'react-router-dom';
 import './style.scss';
 
 function formatDate(date) {
-    return date.substring(0,10);
+    return date.substring(0, 10);
 }
 
 export default class EventListNode extends React.Component {
- 
-
     render() {
         if (!this.props.new) {
             return null;
@@ -23,7 +21,7 @@ export default class EventListNode extends React.Component {
                 </div>
                 <div className="side-content">
                     <div className="header"></div>
-                    <Link to="/detail"><div className="title">{title}</div></Link>
+                    <Link to={"/detail/:"+_id}><div className="title">{title}</div></Link>
                     <p className="side-p">{content}</p>
                     <div className="tip">
                         <span className="tip-item"><a href={link}>链接</a></span>
