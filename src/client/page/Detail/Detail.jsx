@@ -5,8 +5,8 @@ import SideBar from '../../component/Common/SideBar/SideBar';
 import axios from '../../config/axios';
 import api from '../../config/api';
 
-import '../../assets/css/style.css'
-import '../../assets/css/common.css'
+import '../../assets/css/style.css';
+import '../../assets/css/common.css';
 
 export default class Detail extends React.Component {
     constructor(props) {
@@ -60,7 +60,6 @@ export default class Detail extends React.Component {
             }
         })
             .then(res => {
-                console.log(res);
             })
             .catch(err => {
                 console.log(err);

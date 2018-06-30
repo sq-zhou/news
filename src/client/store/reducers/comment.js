@@ -1,4 +1,7 @@
-const comment = (state, action) => {
+const initComment = {
+    newId: 0
+}
+export default comment = (state, action) => {
     switch (action.type) {
         case 'addComment': {
             return {
