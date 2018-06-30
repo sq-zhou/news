@@ -1,4 +1,6 @@
 import React from 'react';
+import AuthNav from '../AuthNav/AuthNav';
+
 import './style.scss';
 
 export default class Nav extends React.Component{
@@ -8,6 +10,7 @@ export default class Nav extends React.Component{
     render() {
         return (
         <div className="Nav">
+            <AuthNav />
             <div className="top-title">
                 <h2>新闻聚类</h2>
             </div>

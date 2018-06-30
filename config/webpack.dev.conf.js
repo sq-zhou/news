@@ -61,7 +61,6 @@ let config = {
             {
                 test: /\.(css)$/,
                 loader: 'style-loader?sourceMap!css-loader?sourceMap',
-                exclude: /node_modules/
             },
             {
                 test: /\.scss$/,
