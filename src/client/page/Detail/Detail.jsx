@@ -1,4 +1,4 @@
-import React from 'C:/Users/Administrator.BF-201701130007/AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/react';
+import React from 'react';
 import Nav from '../../component/Common/Nav/Nav';
 import Article from '../../component/Article/Article';
 import SideBar from '../../component/Common/SideBar/SideBar';

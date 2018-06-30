@@ -28,7 +28,7 @@ mongoose.connect('mongodb://localhost/news');
 
 const app = express();
 
-app.use(cors(corsConfig))
+app.use(cors(corsConfig));
 app.use(express.static('dist'));
 app.use(bodyParser.json())
 

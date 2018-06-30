@@ -1,5 +1,5 @@
-import React from 'C:/Users/Administrator.BF-201701130007/AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/react';
-import { Link } from 'C:/Users/Administrator.BF-201701130007/AppData/Local/Microsoft/TypeScript/2.9/node_modules/@types/react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 import './style.scss';
 
