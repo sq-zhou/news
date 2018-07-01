@@ -1,5 +1,5 @@
 import React from 'react';
-import New from '../../component/New/New.jsx';
+import New from '../../component/Comment/Comment';
 
 import './style.scss';
 
