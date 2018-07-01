@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import './style.scss'
 
@@ -7,8 +8,8 @@ export default class AuthNav extends React.Component {
         return (
         <div className="authNav">
             <div className="notLogin-nav">
-                <span className="">登录</span>
-                <span className="">注册</span>
+                <Link to="/login"><span>登录</span></Link>
+                <Link to="/login"><span>登录</span></Link>
             </div>
         </div>)
     }

@@ -1,7 +1,6 @@
 import React from 'react';
-import ReactMarkdown from 'react-markdown';
-import EventListNode from '../common/EventListNode/EventListNode'
-import New from '../New/New';
+import EventListNode from '../common/EventListNode/EventListNode';
+import New from '../Comment/Comment';
 
 import './style.scss'
 
@@ -16,6 +15,9 @@ export default class Article extends React.Component {
                     {this.props.newObj ? <EventListNode new={this.props.newObj} /> : null}
                 </div>
                 <div>
+                    <New />
+                    <New />
+                    <New />
                 </div>
                 <div className="submit">
                     <textarea className="submit-text"></textarea>
