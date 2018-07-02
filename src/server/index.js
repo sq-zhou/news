@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors')
 const _ = require('lodash');
 const assert = require('assert');
+const md5 = require("crypto").createHash("md5");
 
 const frontendHost = 'http://localhost:8080'
 const corsConfig = {
@@ -80,6 +81,46 @@ app.post('/api/comment', async (req, res) => {
     });
 });
 
+app.post('/api/user/login', async (req, res) => {
+    const { body } = req;
+    const { username, password } = body;
+    const repassword = User.find({ username });
+    if (!repassword) {
+        return res.status(200).send({
+            message: '用户名不存在!'
+        });
+    }
+    if (repassword === md5.update(password).digest("hex")) {
+        return res.status(200).send({
+            message: 'success'
+        });
+    } else {
+        return res.status(200).send({
+            message: '密码错误！'
+        });
+    }
+
+})
+
+app.post('/api/user/register', async (req, res) => {
+    const { body } = req;
+    const { username, password } = body;
+    const cryptoPassword = md5.update(password).digest("hex");
+    try {
+        await User.create({
+            username,
+            password: cryptoPassword
+        })
+        return res.status(200).send({
+            message: 'success'
+        });
+    } catch (error) {
+        return res.status(500).send({
+            message: 'erroe'
+        });
+    }
+   
+})
 app.listen(3000, () =>
     console.log('Listening on port 3000!')
 );
