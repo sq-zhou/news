@@ -57,6 +57,20 @@ app.get('/api/news', async (req, res) => {
     res.send(item);
 });
 
+app.get('/api/latestNews', async (req, res) => {
+    const {
+        offset,
+        limit,
+    } = req.query;
+
+    const collection = await News
+        .find()
+        .sort({date: -1})
+        .skip(offset || 0)
+        .limit(limit || 20);
+    return res.send(collection);
+});
+
 app.get('/api/comment', async (req, res) => {
     const {
         newsId,
