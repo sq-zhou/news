@@ -61,6 +61,8 @@ app.get('/api/comment', async (req, res) => {
     const {
         newsId,
         id: commentId,
+        offset,
+        limit,
     } = req.query;
 
     if (!_.isUndefined(commentId)) {
@@ -69,7 +71,11 @@ app.get('/api/comment', async (req, res) => {
     }
 
     if (!_.isUndefined(newsId)) {
-        const collection = await Comment.find({ newsId });
+        const collection = await Comment
+            .find({ newsId })
+            .sort({date: -1})
+            .skip(offset || 0)
+            .limit(limit || 20);
         return res.send(collection);
     }
 
