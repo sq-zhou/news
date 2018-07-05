@@ -1,6 +1,6 @@
 import Home from './Home';
 import { connect } from 'react-redux';
-import { UserAction } from 'Action';
+import { user as UserAction } from 'Action';
 
 const mapStateToProps = state => {
   return {

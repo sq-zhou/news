@@ -1,5 +1,4 @@
-const host = "http://localhost:3000";
 const hostApi = "/api";
-const api = host + hostApi;
+const api = hostApi;
 
 export default api

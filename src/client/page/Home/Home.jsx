@@ -5,7 +5,7 @@ import SideBar from 'Component/Common/SideBar/SideBar';
 import axios from 'Config/axios';
 import api from 'Config/api';
 
-export default class Index extends React.Component {
+export default class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -14,15 +14,28 @@ export default class Index extends React.Component {
     }
 
     componentDidMount() {
-        axios.get(api + "/news")
-            .then(res => {
-                this.setState({
-                    newsList: res.data
-                });
-            })
-            .catch(err => {
-                console.log(err);
-            })
+        this.fetchUser();
+        this.fetchNews();
+    }
+
+    async fetchUser() {
+        const { login } = this.props;
+        try {
+            const resp = await axios.get(api + "/user/me");
+            const user = resp.data;
+            window.__USER__ = user;
+            login(user);
+        } catch (e) {
+            console.log(e);
+        };
+    }
+
+    async fetchNews() {
+        const { data } = await axios.get(api + "/news");
+
+        this.setState({
+            newsList: data,
+        });
     }
 
     render() {

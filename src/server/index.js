@@ -8,25 +8,10 @@ const _ = require('lodash');
 const assert = require('assert');
 const crypto = require('crypto');
 
-const frontendHost = 'http://localhost:8080'
-const corsConfig = {
-    origin: function (origin, callback) {
-        if (frontendHost.indexOf(origin) !== -1) {
-            callback(null, true)
-        } else {
-            callback(new Error('Not allowed by CORS'))
-        }
-    },
-    credentials: true
-};
-
 const sess = {
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true,
-    cookie: {
-        secure: true,
-    },
 };
 
 const {
@@ -35,7 +20,7 @@ const {
     User,
 } = require('./models');
 
-mongoose.connect('mongodb://localhost/news');
+mongoose.connect('mongodb://127.0.0.1/news');
 
 const app = express();
 
@@ -44,16 +29,13 @@ const hashPassword = source => crypto
     .update(source)
     .digest('base64');
 
-app.use(session(sess));
-app.use(cors(corsConfig));
-app.use(express.static('dist'));
-app.use(bodyParser.json())
-
 app.use(function (req, res, next) {
     req.db = mongoose.connection;
     next();
 });
-
+app.use(session(sess));
+app.use(express.static('dist'));
+app.use(bodyParser.json())
 
 /**
  *  News
@@ -156,24 +138,31 @@ app.post('/api/register', async (req, res) => {
 
 app.post('/api/login', async (req, res) => {
     const { username, password } = req.body;
-    const user = await User.findOne({
-        username,
-    });
-    if (user === null) {
-        return res.status(404).send({
-            message: 'user not found',
+    try {
+        const user = await User.findOne({
+            username,
+        });
+        if (user === null) {
+            return res.status(404).send({
+                message: 'user not found',
+            });
+        }
+        const hashPass = hashPassword(password);
+        if (user.password !== hashPass) {
+            return res.status(400).send({
+                message: 'invalid password',
+            });
+        }
+        req.session.uid = user._id;
+        return res.send({
+            message: 'success',
+        });
+    } catch (e) {
+        console.error(e);
+        return res.status(500).send({
+            message: 'unknown error',
         });
     }
-    const hashPass = hashPassword(password);
-    if (user.password !== hashPass) {
-        return res.status(400).send({
-            message: 'invalid password',
-        });
-    }
-    req.session.uid = user._id;
-    res.send({
-        message: 'success',
-    });
 });
 
 app.post('/api/logout', async (req, res) => {
@@ -191,12 +180,20 @@ app.get('/api/user/me', async (req, res) => {
             message: 'please login',
         });
     }
-    const user = await User.find({ _id: req.session.uid });
-    const { username, createAt } = user;
-    res.send({
-        username,
-        createAt,
-    })
+    let user;
+    try {
+        user = await User.findById(req.session.uid);
+        const { username, createAt } = user;
+        return res.send({
+            username,
+            createAt,
+        });
+    } catch (e) {
+        console.error(e);
+        return res.status(500).send({
+            message: 'unknown message',
+        });
+    }
 });
 
 app.listen(3000, () =>

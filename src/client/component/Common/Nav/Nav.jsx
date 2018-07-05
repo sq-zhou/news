@@ -10,7 +10,7 @@ export default class Nav extends React.Component{
     render() {
         return (
         <div className="Nav">
-            <AuthNav />
+            <AuthNav {...this.props} />
             <div className="top-title">
                 <h2>新闻聚类</h2>
             </div>

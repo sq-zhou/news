@@ -6,15 +6,12 @@ import './style.scss'
 export default class AuthNav extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            loginStatus: false
-        };
     }
 
     render() {
-        const { loginStatus } = this.state;
+        const { user } = this.props;
         let showInfo;
-        if (loginStatus === false) {
+        if (user === null) {
             showInfo = (
                 <div className="notLogin-nav">
                     <Link to="/login"><span>登录</span></Link>
@@ -24,7 +21,7 @@ export default class AuthNav extends React.Component {
         } else {
             showInfo = (
                 <div className="login-nav">
-                    <span>用户名</span>
+                    <span>已登陆： { user.username }</span>
                 </div>
             )
         }
