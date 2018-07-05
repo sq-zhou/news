@@ -50,6 +50,10 @@ app.use(function (req, res, next) {
     next();
 });
 
+
+/**
+ *  News
+ */
 app.get('/api/news', async (req, res) => {
     const {
         id,
@@ -84,6 +88,9 @@ app.get('/api/latestNews', async (req, res) => {
     return res.send(collection);
 });
 
+/**
+ * Comment
+ */
 app.get('/api/comment', async (req, res) => {
     const {
         newsId,
@@ -122,6 +129,9 @@ app.post('/api/comment', async (req, res) => {
     });
 });
 
+/**
+ * User
+ */
 app.post('/api/register', async (req, res) => {
     const { username, password } = req.body;
     const user = await User.findOne({ username });
