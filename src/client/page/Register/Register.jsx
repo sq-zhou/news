@@ -65,7 +65,7 @@ export default class Register extends React.Component {
     render() {
         return (
             <div className="Login">
-                <div className="wrapper">
+                <form className="wrapper">
                     <h2 className="title">注册</h2>
                     <Input type="text" size="default" placeholder="用户名" value={this.state.username}
                            onChange={e => this.onUsernameChanged(e)}/>
@@ -79,7 +79,7 @@ export default class Register extends React.Component {
                     <a className="Login-submit" onClick={() => this.register()}>
                         注册
                     </a>
-                </div>
+                </form>
             </div>
         )
     }

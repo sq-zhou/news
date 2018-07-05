@@ -41,7 +41,7 @@ const hashPassword = source => crypto
     .digest('base64');
 
 app.use(session(sess));
-app.use(cors(corsConfig));
+// app.use(cors(corsConfig));
 app.use(express.static('dist'));
 app.use(bodyParser.json())
 
@@ -181,7 +181,7 @@ app.post('/api/logout', async (req, res) => {
     });
 });
 
-app.post('/api/user/me', async (req, res) => {
+app.get('/api/user/me', async (req, res) => {
     if (typeof req.session.uid === 'undefined') {
         return res.status(404).send({
             message: 'please login',

@@ -32,18 +32,19 @@ export default class Login extends React.Component {
     }
 
     async login() {
+        const { history } = this.props;
         const { username, password } = this.state;
         await axios.post(api + '/login', {
             username,
             password,
         });
-        history.pushState('/');
+        history.push('/');
     }
 
     render() {
         return (
             <div className="Login">
-                <div className="wrapper">
+                <form className="wrapper">
                     <h2 className="title">登录</h2>
                     <Input type="text" size="default" placeholder="用户名" value={this.state.username}
                            onChange={(e) => this.onChangeUsername(e)}/>
@@ -54,7 +55,7 @@ export default class Login extends React.Component {
                     <a className="Login-submit" onClick={() => this.login()}>
                         登录
                     </a>
-                </div>
+                </form>
             </div>
         )
     }

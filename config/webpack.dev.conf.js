@@ -6,7 +6,7 @@ const webpackFile = require("./webpack.file.conf");
 let config = {
     mode: 'development',
     entry: {
-        index: path.join(__dirname, '../src/client/index.js'),
+        index: ['babel-polyfill', path.join(__dirname, '../src/client/index.js')],
     },
     resolve: {
         extensions: [".js", ".json", ".jsx", ".css", ".pcss", "sass"],
