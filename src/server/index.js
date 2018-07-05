@@ -39,9 +39,18 @@ app.use(function (req, res, next) {
 });
 
 app.get('/api/news', async (req, res) => {
-    const id = req.param('id');
+    const {
+        id,
+        offset,
+        limit,
+    } = req.query;
+
     if (_.isUndefined(id)) {
-        const collection = await News.find();
+        const collection = await News
+            .find()
+            .sort({date: -1})
+            .skip(offset || 0)
+            .limit(limit || 20);
         return res.send(collection);
     }
 
@@ -53,6 +62,8 @@ app.get('/api/comment', async (req, res) => {
     const {
         newsId,
         id: commentId,
+        offset,
+        limit,
     } = req.query;
 
     if (!_.isUndefined(commentId)) {
@@ -61,7 +72,11 @@ app.get('/api/comment', async (req, res) => {
     }
 
     if (!_.isUndefined(newsId)) {
-        const collection = await Comment.find({ newsId });
+        const collection = await Comment
+            .find({ newsId })
+            .sort({date: -1})
+            .skip(offset || 0)
+            .limit(limit || 20);
         return res.send(collection);
     }
 
