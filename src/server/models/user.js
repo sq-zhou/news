@@ -9,6 +9,10 @@ const UserScheme = mongoose.Schema({
     type: String,
     required: true,
   },
+  createAt: {
+    type: Date,
+    required: true,
+  },
 });
 
 const User = mongoose.model('user', UserScheme);
