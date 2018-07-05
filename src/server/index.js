@@ -155,6 +155,11 @@ app.post('/api/login', async (req, res) => {
     const user = await User.findOne({
         username,
     });
+    if (user === null) {
+        return res.status(404).send({
+            message: 'user not found',
+        });
+    }
     const hashPass = hashPassword(password);
     if (user.password !== hashPass) {
         return res.status(400).send({

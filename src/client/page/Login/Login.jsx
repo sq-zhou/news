@@ -1,5 +1,7 @@
 import React from 'react';
 import { Input } from 'antd';
+import axios from 'Config/axios';
+import api from 'Config/api';
 
 import 'antd/dist/antd.css';
 import './style.scss';
@@ -17,10 +19,6 @@ export default class Login extends React.Component {
       
     }
 
-    loginIn({account, password}) {}
-
-    setLogin() {}
-
     onChangeUsername(e) {
         this.setState({
             username: e.target.value,
@@ -33,7 +31,14 @@ export default class Login extends React.Component {
         });
     }
 
-    login() {}
+    async login() {
+        const { username, password } = this.state;
+        await axios.post(api + '/login', {
+            username,
+            password,
+        });
+        history.pushState('/');
+    }
 
     render() {
         return (

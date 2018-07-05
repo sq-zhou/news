@@ -1,8 +1,9 @@
 import React from 'react';
 import { Input } from 'antd';
-
 import 'antd/dist/antd.css';
 import './style.scss';
+import axios from 'Config/axios';
+import api from 'Config/api';
 
 export default class Register extends React.Component {
     constructor(props) {
@@ -40,8 +41,9 @@ export default class Register extends React.Component {
         });
     }
 
-    register() {
-        const { password, confirmPassword } = this.state;
+    async register() {
+        const { history } = this.props;
+        const { username, password, confirmPassword } = this.state;
         if (password !== confirmPassword) {
             alert('密码不一致');
             return;
@@ -52,6 +54,12 @@ export default class Register extends React.Component {
             return;
         }
 
+        await axios.post(api + '/register', {
+            username,
+            password,
+        });
+
+        history.push('')
     }
 
     render() {
