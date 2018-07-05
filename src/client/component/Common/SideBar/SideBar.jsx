@@ -1,7 +1,7 @@
-import React from 'react'
-import EventListNode from '../EventListNode/EventListNode'
+import React from 'react';
+import EventListNode from '../EventListNode/EventListNode';
 
-import './style.scss'
+import './style.scss';
 
 export default class SideBar extends React.Component {
     render() {

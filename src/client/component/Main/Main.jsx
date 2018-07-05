@@ -1,6 +1,6 @@
-import React from 'react'
-import MainHeaderNews from './MainHeaderNews/MainHeaderNews.jsx'
-import EventListNode from '../../component/Common/EventListNode/EventListNode.jsx'
+import React from 'react';
+import MainHeaderNews from './MainHeaderNews/MainHeaderNews';
+import EventListNode from '../../component/Common/EventListNode/EventListNode';
 
 export default class Main extends React.Component {
     render() {
