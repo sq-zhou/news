@@ -1,7 +1,8 @@
 const initComment = {
     newId: 0
 }
-export default comment = (state, action) => {
+
+const comment = (state = initComment, action) => {
     switch (action.type) {
         case 'addComment': {
             return {
@@ -10,4 +11,6 @@ export default comment = (state, action) => {
         }
         default: return state;
     }
-}
+};
+
+export default comment;

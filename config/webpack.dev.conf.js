@@ -14,6 +14,7 @@ let config = {
             Config: path.resolve(__dirname, '../src/client/config'),
             Component: path.resolve(__dirname, '../src/client/component'),
             Page: path.resolve(__dirname, '../src/client/page'),
+            Action: path.resolve(__dirname, '../src/client/store/actions'),
         },
     },
     output: {

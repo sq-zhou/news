@@ -22,8 +22,12 @@ const corsConfig = {
 
 const sess = {
     secret: 'keyboard cat',
-    cookie: {}
-}
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        secure: true,
+    },
+};
 
 const {
     News,
@@ -41,7 +45,7 @@ const hashPassword = source => crypto
     .digest('base64');
 
 app.use(session(sess));
-// app.use(cors(corsConfig));
+app.use(cors(corsConfig));
 app.use(express.static('dist'));
 app.use(bodyParser.json())
 

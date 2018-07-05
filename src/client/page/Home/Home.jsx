@@ -29,7 +29,7 @@ export default class Index extends React.Component {
         const { newsList } = this.state;
         return (
             <div className="home">
-                <Nav />
+                <Nav {...this.props} />
                 <div className="news-content-wrapper">
                     <div className="news-content-right">
                         <SideBar sideBarList={newsList}/>

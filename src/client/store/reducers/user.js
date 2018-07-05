@@ -1,15 +1,14 @@
-const initUser = {
-    userId: 0,
-    loginState: 0,
-    username: ''
-}
-export default user = (state = initUser, actions) => {
-    switch (actions.type) {
+
+const user = (state = null, action) => {
+    switch (action.type) {
         case 'login':
-            return state;
-        case  'loginout':
-            return state;
+            const { payload } = action;
+            return payload;
+        case  'logout':
+            return null;
         default: 
             return state;
     }
-}
+};
+
+export default user;
