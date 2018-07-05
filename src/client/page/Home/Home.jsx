@@ -1,9 +1,9 @@
 import React from 'react';
-import Nav from '../../component/Common/Nav/Nav';
-import Main from '../../component/Main/Main';
-import SideBar from '../../component/Common/SideBar/SideBar';
-import axios from '../../config/axios';
-import api from '../../config/api';
+import Nav from 'Component/Common/Nav/Nav';
+import Main from 'Component/Main/Main';
+import SideBar from 'Component/Common/SideBar/SideBar';
+import axios from 'Config/axios';
+import api from 'Config/api';
 
 export default class Index extends React.Component {
     constructor(props) {

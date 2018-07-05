@@ -10,6 +10,11 @@ let config = {
     },
     resolve: {
         extensions: [".js", ".json", ".jsx", ".css", ".pcss", "sass"],
+        alias: {
+            Config: path.resolve(__dirname, '../src/client/config'),
+            Component: path.resolve(__dirname, '../src/client/component'),
+            Page: path.resolve(__dirname, '../src/client/page'),
+        },
     },
     output: {
         path: path.join(__dirname + "../dev"),

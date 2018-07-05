@@ -18,7 +18,7 @@ export default class AuthNav extends React.Component {
             showInfo = (
                 <div className="notLogin-nav">
                     <Link to="/login"><span>登录</span></Link>
-                    <Link to="/login"><span>注册</span></Link>
+                    <Link to="/register"><span>注册</span></Link>
                 </div>
             )
         } else {

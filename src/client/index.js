@@ -5,6 +5,7 @@ import Home from './page/Home/Home';
 import Detail from './page/Detail/Detail';
 import Manager from './page/Manager/Manager';
 import Login from './page/Login/Login';
+import Register from './page/Register/Register';
 
 import './assets/css/style.css';
 import './assets/css/common.css';
@@ -18,6 +19,7 @@ ReactDOM.render(
             </Route>
             <Route path="/manager" component={Manager} />
             <Route path="/login" component={Login}/>
+            <Route path="/register" component={Register}/>
         </div>
     </Router>
     , document.getElementById('app'));

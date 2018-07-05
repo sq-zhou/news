@@ -7,9 +7,8 @@ import './style.scss';
 export default class Login extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {PromptOpen: false, content: ''}
         this.state = {
-            account: '',
+            username: '',
             password: ''
         }
     }
@@ -22,10 +21,16 @@ export default class Login extends React.Component {
 
     setLogin() {}
 
-    onChangeUserName(e) {
+    onChangeUsername(e) {
+        this.setState({
+            username: e.target.value,
+        });
     }
 
     onChangePassword(e) {
+        this.setState({
+            password: e.target.value,
+        });
     }
 
     login() {}
@@ -34,16 +39,16 @@ export default class Login extends React.Component {
         return (
             <div className="Login">
                 <div className="wrapper">
-                    <h2 className="title">L-技术</h2>
-                    <Input type="text" size="default" placeholder="用户名" value={this.state.account}
-                           onChange={(e) => this.onChangeUserName(e)}/>
+                    <h2 className="title">登录</h2>
+                    <Input type="text" size="default" placeholder="用户名" value={this.state.username}
+                           onChange={(e) => this.onChangeUsername(e)}/>
                     <span className="line"/>
                     <Input type="password" size="default" placeholder="密码" value={this.state.password}
                            onChange={(e) => this.onChangePassword(e)}/>
                     <span className="line"/>
-                    <a className="Login-submit" onClick={() => {
-                        this.login()
-                    }}>登录</a>
+                    <a className="Login-submit" onClick={() => this.login()}>
+                        登录
+                    </a>
                 </div>
             </div>
         )
