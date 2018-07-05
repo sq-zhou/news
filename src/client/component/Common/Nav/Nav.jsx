@@ -1,5 +1,6 @@
 import React from 'react';
-import AuthNav from '../AuthNav/AuthNav';
+import AuthNav from '../AuthNav';
+import { Link } from 'react-router-dom';
 
 import './style.scss';
 
@@ -10,9 +11,9 @@ export default class Nav extends React.Component{
     render() {
         return (
         <div className="Nav">
-            <AuthNav {...this.props} />
+            <AuthNav />
             <div className="top-title">
-                <h2>新闻聚类</h2>
+                <h2><Link to="/">新闻聚类</Link></h2>
             </div>
             <div className="menu">
                 <span className="item">体育</span>

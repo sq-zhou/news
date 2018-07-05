@@ -42,7 +42,7 @@ export default class Home extends React.Component {
         const { newsList } = this.state;
         return (
             <div className="home">
-                <Nav {...this.props} />
+                <Nav />
                 <div className="news-content-wrapper">
                     <div className="news-content-right">
                         <SideBar sideBarList={newsList}/>
