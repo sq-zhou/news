@@ -1,6 +1,6 @@
 import React from 'react';
-import ManagerList from '../../component/ManagerList/ManagerList.jsx';
-import ManagerMenu from '../../component/ManagerMenu/ManagerMenu.jsx';
+import ManagerList from '../../component/ManagerList/ManagerList';
+import ManagerMenu from '../../component/ManagerMenu/ManagerMenu';
 
 import './style.scss';
 
