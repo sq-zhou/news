@@ -60,6 +60,25 @@ app.get('/api/news', async (req, res) => {
     res.send(item);
 });
 
+app.put('/api/news', async (req, res) => {
+    const {_id, ...rest} = req.body;
+
+    if (_.isUndefined(_id)) {
+        return res.status(404).send({
+            message: '缺少 id',
+        });
+    }
+
+    await News.findOneAndUpdate(
+        {_id},
+        rest,
+    );
+
+    res.send({
+        message: 'success',
+    });
+});
+
 app.get('/api/latestNews', async (req, res) => {
     const {
         offset,

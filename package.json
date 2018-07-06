@@ -27,7 +27,7 @@
     "mongo": "^0.1.0",
     "mongoose": "^5.1.6",
     "node-fetch": "^2.1.2",
-    "node-sass": "^4.6.0",
+    "node-sass": "^4.9.1",
     "nodejieba": "^2.2.6",
     "nodemon": "^1.17.5",
     "optimize-css-assets-webpack-plugin": "4.0.0",

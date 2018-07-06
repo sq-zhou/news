@@ -1,6 +1,7 @@
 import React from 'react';
 import { Layout, Menu, Icon, Button } from 'antd';
 import UserAdmin from './UserAdmin';
+import NewsAdmin from './NewsAdmin';
 
 import './styles.scss'
 
@@ -59,7 +60,7 @@ class Admin extends React.Component {
       case '/admin/user':
         return <UserAdmin />;
       case '/admin/news':
-        return <UserAdmin />;
+        return <NewsAdmin />;
       case '/admin/comment':
         return <UserAdmin />;
     }

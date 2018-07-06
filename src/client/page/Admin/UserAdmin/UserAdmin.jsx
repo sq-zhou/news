@@ -1,7 +1,6 @@
 import React from 'react';
 import { Card, Button, Input, Select, Form } from 'antd';
 import axios from 'Config/axios';
-import api from 'Config/api';
 
 const FormItem = Form.Item;
 
@@ -29,7 +28,7 @@ class UserAdmin extends React.Component {
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
-        sm: { span: 8 },
+        sm: { span: 4 },
       },
       wrapperCol: {
         xs: { span: 24 },
