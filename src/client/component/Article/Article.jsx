@@ -1,6 +1,6 @@
 import React from 'react';
 import EventListNode from '../common/EventListNode/EventListNode';
-import New from '../Comment/Comment';
+import Comment from '../Comment';
 import _ from 'lodash';
 import { Input } from 'antd';
 const { TextArea } = Input;
@@ -76,16 +76,16 @@ export default class Article extends React.Component {
     }
 
     render() {
-        const { user } = this.props;
+        const { user, comments } = this.props;
         return (
             <div className="article">
                 <div className="text">
                     {this.props.newObj ? <EventListNode new={this.props.newObj} /> : null}
                 </div>
                 <div>
-                    <New />
-                    <New />
-                    <New />
+                    {
+                        comments.map(comment => <Comment {...comment} />)
+                    }
                 </div>
                 {this.submitForm}
             </div>

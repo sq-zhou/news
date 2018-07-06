@@ -44,17 +44,8 @@ export default class Detail extends React.Component {
             .catch((err) => {
                 console.log(err);
             })
-        // 请求评论数据
-        axios.get(api + "/comment", {
-            params: {
-                newsId: id
-            }
-        })
-            .then(res => {
-            })
-            .catch(err => {
-                console.log(err);
-            })
+
+        this.fetchComments(id);
     }
 
     async fetchNews() {
@@ -64,7 +55,7 @@ export default class Detail extends React.Component {
         });
     }
 
-    async fetchComments() {
+    async fetchComments(id) {
         const { data } = await axios.get(api + "/comment", {
             params: {
                 newsId: id

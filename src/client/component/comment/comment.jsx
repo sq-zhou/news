@@ -4,29 +4,47 @@ import axios from '../../config/axios';
 
 import './style.scss';
 
-export default class New extends React.Component {
+function getDateDiff(dateTimeStamp) {
+    var result;
+    var minute = 1000 * 60;
+    var hour = minute * 60;
+    var day = hour * 24;
+    var halfamonth = day * 15;
+    var month = day * 30;
+    var now = new Date().getTime();
+    var diffValue = now - dateTimeStamp;
+    if (diffValue < 0) { return; }
+    var monthC = diffValue / month;
+    var weekC = diffValue / (7 * day);
+    var dayC = diffValue / day;
+    var hourC = diffValue / hour;
+    var minC = diffValue / minute;
+    if (monthC >= 1) {
+        result = "" + parseInt(monthC) + "月前";
+    }
+    else if (weekC >= 1) {
+        result = "" + parseInt(weekC) + "周前";
+    }
+    else if (dayC >= 1) {
+        result = "" + parseInt(dayC) + "天前";
+    }
+    else if (hourC >= 1) {
+        result = "" + parseInt(hourC) + "小时前";
+    }
+    else if (minC >= 1) {
+        result = "" + parseInt(minC) + "分钟前";
+    } else
+        result = "刚刚";
+    return result;
+}
+
+export default class Comment extends React.Component {
     constructor(props) {
         super(props);
-        this.register = this.register.bind(this);
-        this.login = this.login.bind(this);
-    }
-
-    register() {
-        axios.post(api + '/user/register', {
-            username: 'sqz',
-            password: 'asqw'
-        })
-    }
-
-    login() {
-        axios.post(api + '/user/login', {
-            username: 'sqz',
-            password: 'asqw'
-        })
     }
 
     render() {
-        const { type } = this.props;
+        const { type, content, author, date } = this.props;
         let details;
         if (type === "comment") {
             details =
@@ -50,13 +68,13 @@ export default class New extends React.Component {
         return (
             <div className="new">
                 <div className="new-publish">
-                    <span className="publisher one" onClick={this.register}>sqz</span>
+                    <span className="publisher one">{ author.username }</span>
                     <span className="response">回复</span>
-                    <span className="publisher two" onClick={this.login}>zhousq</span>
-                    <span className="time">7天前</span>
+                    <span className="publisher two">zhousq</span>
+                    <span className="time">{ getDateDiff(new Date(date)) }</span>
                 </div>
                 <div className="content">
-                    <div>电影中所涉及的社会集体xxx，一定要在黑暗中度过，尚未看到光明没这事印度尼西亚华人的写照</div>
+                    <div>{ content }</div>
                 </div>
                 {details}
             </div>)
