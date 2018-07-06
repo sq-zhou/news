@@ -130,9 +130,25 @@ app.get('/api/comment', async (req, res) => {
         return res.send(result);
     }
 
-    return res.status(404).send({
-        error: "Please provide id or newsId",
-    });
+    const collection = await Comment
+        .find()
+        .sort({date: -1})
+        .skip(offset || 0)
+        .limit(limit || 20);
+    
+    const comments = collection.map(comment => _.omit(comment.toObject(), ['__v']))
+
+    const result = [];
+    for (let i = 0; i < comments.length; i++) {
+        const comment = comments[i];
+        const user = await User.findById(comment.userId);
+        result.push({
+            ...comment,
+            user: _.omit(user.toObject(), ['password', '__v']),
+        });
+    }
+    
+    return res.send(result);
 });
 
 app.post('/api/comment', async (req, res) => {
@@ -158,6 +174,14 @@ app.post('/api/comment', async (req, res) => {
     return res.send({
         message: 'success',
     });
+});
+
+app.delete('/api/comment', async (req, res) => {
+    const { _id } = req.query;
+    await Comment.deleteOne({ _id });
+    return res.send({
+        message: 'success',
+    })
 });
 
 /**
