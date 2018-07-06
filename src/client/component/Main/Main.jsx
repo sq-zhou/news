@@ -5,9 +5,11 @@ import EventListNode from '../../component/Common/EventListNode/EventListNode';
 export default class Main extends React.Component {
     render() {
         const { newsList } = this.props;
+        const [head, ...tail] = newsList;
+
         let nodeList = null;
-        if (newsList) {
-            nodeList = newsList.map((value, key) => (
+        if (newsList && tail) {
+            nodeList = tail.map((value, key) => (
                 <div className="event-node-wrapper" key={key}>
                     <EventListNode new={value} />
                 </div>
@@ -17,9 +19,10 @@ export default class Main extends React.Component {
             }
         }
 
+
         return (
             <div className="main">
-                <MainHeaderNews />
+                <MainHeaderNews news={head} />
                 <div className="main-event-list">
                     {nodeList}
                 </div>

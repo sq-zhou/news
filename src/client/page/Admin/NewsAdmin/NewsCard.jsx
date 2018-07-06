@@ -64,6 +64,21 @@ class NewsCard extends React.Component {
     alert('更新成功');
   }
 
+  onDelete = async e => {
+    e.preventDefault();
+
+    const confirm = window.confirm("是否要删除这个新闻？");
+
+    if (confirm) {
+      const { _id } = this.state;
+
+      await axios.delete(`/api/news?_id=${_id}`);
+
+      this.props.onDelete && this.props.onDelete();
+      alert('删除成功');
+    }
+  }
+
   render() {
     const formItemLayout = {
       labelCol: {
@@ -88,7 +103,12 @@ class NewsCard extends React.Component {
       <Card
         type="inner"
         title={title}
-        extra={<Button onClick={this.updateInfo} size="small">更新</Button>}
+        extra={
+          <div>
+            <Button onClick={this.updateInfo} size="small">更新</Button>
+            <Button onClick={this.onDelete} size="small" type="danger">删除</Button>
+          </div>
+        }
       >
         <Form>
           <FormItem

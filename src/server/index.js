@@ -79,6 +79,14 @@ app.put('/api/news', async (req, res) => {
     });
 });
 
+app.delete('/api/news', async (req, res) => {
+    const { _id } = req.query;
+    await News.deleteOne({ _id });
+    return res.send({
+        message: 'success',
+    });
+})
+
 app.get('/api/latestNews', async (req, res) => {
     const {
         offset,
@@ -181,7 +189,7 @@ app.delete('/api/comment', async (req, res) => {
     await Comment.deleteOne({ _id });
     return res.send({
         message: 'success',
-    })
+    });
 });
 
 /**
