@@ -15,6 +15,7 @@
     "cache-loader": "^1.2.2",
     "cheerio": "^1.0.0-rc.2",
     "clean-webpack-plugin": "0.1.19",
+    "connect-mongo": "^2.0.1",
     "copy-webpack-plugin": "4.5.1",
     "cors": "^2.8.4",
     "css-loader": "0.28.11",

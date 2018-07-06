@@ -3,16 +3,11 @@ const os = require('os');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 const cors = require('cors')
 const _ = require('lodash');
 const assert = require('assert');
 const crypto = require('crypto');
-
-const sess = {
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: true,
-};
 
 const {
     News,
@@ -33,7 +28,14 @@ app.use(function (req, res, next) {
     req.db = mongoose.connection;
     next();
 });
-app.use(session(sess));
+app.use(session({
+    secret: 'foo',
+    resave: false,
+    saveUninitialized: true,
+    store: new MongoStore({
+        mongooseConnection: mongoose.connection,
+    }),
+}));
 app.use(express.static('dist'));
 app.use(bodyParser.json())
 
