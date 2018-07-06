@@ -14,20 +14,7 @@ export default class Home extends React.Component {
     }
 
     componentDidMount() {
-        this.fetchUser();
         this.fetchNews();
-    }
-
-    async fetchUser() {
-        const { login } = this.props;
-        try {
-            const resp = await axios.get(api + "/user/me");
-            const user = resp.data;
-            window.__USER__ = user;
-            login(user);
-        } catch (e) {
-            console.log(e);
-        };
     }
 
     async fetchNews() {

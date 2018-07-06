@@ -1,6 +1,6 @@
 import React from 'react';
 import Nav from 'Component/Common/Nav/Nav';
-import Article from 'Component/Article/Article';
+import Article from 'Component/Article';
 import SideBar from 'Component/Common/SideBar/SideBar';
 import axios from 'Config/axios';
 import api from 'Config/api';
@@ -11,7 +11,8 @@ export default class Detail extends React.Component {
         this.state = {
             id: '',
             newObj: null,
-            newList: []
+            newList: [],
+            comments: [],
         };
         this.splitId = this.splitId.bind(this);
     }
@@ -27,15 +28,8 @@ export default class Detail extends React.Component {
             id: id
         });
         // 请求sideBar数据
-        axios.get(api + "/news")
-            .then(res => {
-                this.setState({
-                    newsList: res.data
-                });
-            })
-            .catch(err => {
-                console.log(err);
-            })
+        this.fetchNews();
+
         // 请求news数据
         axios.get(api + "/news", {
             params: {
@@ -63,8 +57,33 @@ export default class Detail extends React.Component {
             })
     }
 
+    async fetchNews() {
+        const { data } = await axios.get(api + "/news")
+        this.setState({
+            newsList: data,
+        });
+    }
+
+    async fetchComments() {
+        const { data } = await axios.get(api + "/comment", {
+            params: {
+                newsId: id
+            }
+        });
+
+        this.setState({
+            comments: data,
+        });
+    }
+
     render() {
-        const { newsList, newObj } = this.state;
+        const {
+            newsList,
+            newObj,
+            id,
+            comments,
+         } = this.state;
+
         return (
             <div className="detail">
                 <Nav />
@@ -73,7 +92,11 @@ export default class Detail extends React.Component {
                         <SideBar sideBarList={newsList} />
                     </div>
                     <div className="news-content-left">
-                        <Article newObj={newObj} />
+                        <Article
+                            newObj={newObj}
+                            id={id}
+                            comments={comments}
+                        />
                     </div>
                 </div>
             </div>

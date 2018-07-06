@@ -96,7 +96,19 @@ app.get('/api/comment', async (req, res) => {
             .sort({date: -1})
             .skip(offset || 0)
             .limit(limit || 20);
-        return res.send(collection);
+        const result = [];
+
+        for (let i = 0; i < collection.length; i++) {
+            const comment = collection[i].toObject();
+            const { userId, newsId, __v, ...rest } = comment;
+            const user = await User.findById(userId);
+            result.push({
+                author: _.pick(user.toObject(), ['username', 'createAt']),
+                ...rest,
+            });
+        }
+
+        return res.send(result);
     }
 
     return res.status(404).send({
@@ -105,9 +117,23 @@ app.get('/api/comment', async (req, res) => {
 });
 
 app.post('/api/comment', async (req, res) => {
-    const { body } = req;
+    const { uid } = req.session;
+    if (_.isUndefined(uid) || _.isNull(uid)) {
+        return res.status(500).send({
+            message: 'please login',
+        });
+    }
+    const user = await User.findById(uid);
+    if (_.isNull(user)) {
+        return res.status(500).send({
+            message: 'user not exist',
+        });
+    }
+    const { newsId, content } = req.body;
     await Comment.create({
-        ...body,
+        newsId,
+        content,
+        userId: uid,
         date: new Date(),
     });
     return res.send({
