@@ -155,6 +155,7 @@ app.post('/api/register', async (req, res) => {
     await User.create({
         username,
         password: hashPassword(password),
+        level: 'normal',
         createAt: new Date(),
     });
     return res.send({
@@ -209,10 +210,11 @@ app.get('/api/user/me', async (req, res) => {
     let user;
     try {
         user = await User.findById(req.session.uid);
-        const { username, createAt } = user;
+        const { username, createAt, level } = user;
         return res.send({
             username,
             createAt,
+            level: level || 'normal',
         });
     } catch (e) {
         console.error(e);
@@ -220,6 +222,29 @@ app.get('/api/user/me', async (req, res) => {
             message: 'unknown message',
         });
     }
+});
+
+app.get('/api/user', async (req, res) => {
+    const {
+        id,
+        offset,
+        limit,
+    } = req.query;
+
+    if (_.isUndefined(id)) {
+        const collection = await User
+            .find()
+            .sort({createAt: -1})
+            .skip(offset || 0)
+            .limit(limit || 20);
+        return res.send(collection.map(item => {
+            const obj = item.toObject();
+            return _.omit(obj, ['__v', 'password']);
+        }));
+    }
+
+    const item = await User.findById(id);
+    res.send(item);
 });
 
 app.listen(3000, () =>

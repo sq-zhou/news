@@ -13,8 +13,9 @@ const UserScheme = mongoose.Schema({
     type: Date,
     required: true,
   },
+  level: String,
 });
 
 const User = mongoose.model('user', UserScheme);
 
-module.exports = User
+module.exports = User;

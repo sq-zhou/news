@@ -8,6 +8,7 @@ import Detail from 'Page/Detail';
 import Manager from 'Page/Manager';
 import Login from 'Page/Login';
 import Register from 'Page/Register';
+import Admin from 'Page/Admin';
 
 import './assets/css/style.css';
 import './assets/css/common.css';
@@ -23,6 +24,10 @@ ReactDOM.render(
                 <Route path="/manager" component={Manager} />
                 <Route path="/login" component={Login}/>
                 <Route path="/register" component={Register}/>
+                <Route path="/admin" exact component={Admin} />
+                <Route path="/admin/user" exact component={Admin} />
+                <Route path="/admin/news" exact component={Admin} />
+                <Route path="/admin/comment" exact component={Admin} />
             </div>
         </Router>
     </Provider>
