@@ -11,6 +11,7 @@ const crypto = require('crypto');
 
 const {
     News,
+    Tag,
     Comment,
     User,
 } = require('./models');
@@ -38,6 +39,47 @@ app.use(session({
 }));
 app.use(express.static('dist'));
 app.use(bodyParser.json())
+
+/**
+ *  Tag
+ */
+app.get('/api/tag', async (req, res) => {
+    const {
+        name,
+        offset,
+        limit,
+    } = req.query;
+
+    if (_.isUndefined(name)) {
+        const collection = await Tag
+            .find()
+            .skip(offset || 0)
+            .limit(limit || 20);
+        return res.send(collection);
+    }
+
+    const item = await Tag.findOne({ name });
+    res.send(item);
+});
+
+app.put('/api/tag', async (req, res) => {
+    const { name, ...rest } = req.body;
+
+    if (_.isUndefined(name)) {
+        return res.status(404).send({
+            message: '缺少 name',
+        });
+    }
+    
+    await Tag.findOneAndUpdate(
+        { name },
+        rest,
+    );
+
+    res.send({
+        message: 'success',
+    });
+})
 
 /**
  *  News
@@ -73,7 +115,9 @@ app.put('/api/news', async (req, res) => {
 
     await News.findOneAndUpdate(
         {_id},
-        rest,
+        {
+            ...rest,
+        },
     );
 
     res.send({

@@ -27,6 +27,7 @@ class NewsCard extends React.Component {
       content,
       figure,
       link,
+      keywords,
     } = nextProps;
 
     return {
@@ -36,6 +37,8 @@ class NewsCard extends React.Component {
       content,
       figure,
       link,
+      keywords,
+      keywordsBuffer: keywords.join(" "),
       ...prevState,
     };
   }
@@ -50,6 +53,7 @@ class NewsCard extends React.Component {
       content,
       figure,
       link,
+      keywords,
     } = this.state;
 
     await axios.put('/api/news', {
@@ -59,6 +63,7 @@ class NewsCard extends React.Component {
       content,
       figure,
       link,
+      keywords,
     });
 
     alert('更新成功');
@@ -97,6 +102,7 @@ class NewsCard extends React.Component {
       content,
       figure,
       link,
+      keywordsBuffer,
     } = this.state;
 
     return (
@@ -118,6 +124,18 @@ class NewsCard extends React.Component {
             <Input
               value={title}
               onChange={e => this.setState({ title: e.target.value })}
+            />
+          </FormItem>
+          <FormItem
+            {...formItemLayout}
+            label="关键字"
+          >
+            <Input
+              value={keywordsBuffer || ""}
+              onChange={e => this.setState({
+                keywordsBuffer: e.target.value,
+                keywords: e.target.value.split(" "),
+              })}
             />
           </FormItem>
           <FormItem

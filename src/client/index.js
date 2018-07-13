@@ -28,6 +28,7 @@ ReactDOM.render(
                 <Route path="/admin/user" exact component={Admin} />
                 <Route path="/admin/news" exact component={Admin} />
                 <Route path="/admin/comment" exact component={Admin} />
+                <Route path="/admin/tag" exact component={Admin} />
             </div>
         </Router>
     </Provider>

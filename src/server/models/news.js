@@ -5,6 +5,7 @@ const NewsScheme = mongoose.Schema({
     type: String,
     required: true,
   },
+  keywords: Array,
   abstract: {
     type: String,
     required: true,

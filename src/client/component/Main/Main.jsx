@@ -14,7 +14,8 @@ export default class Main extends React.Component {
                     <EventListNode new={value} />
                 </div>
             ));
-            while (nodeList.length > 5) {
+
+            while (nodeList.length > 15) {
                 nodeList.pop();
             }
         }

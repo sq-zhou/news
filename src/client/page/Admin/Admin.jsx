@@ -1,6 +1,7 @@
 import React from 'react';
 import { Layout, Menu, Icon, Button } from 'antd';
 import UserAdmin from './UserAdmin';
+import TagAdmin from './TagAdmin';
 import NewsAdmin from './NewsAdmin';
 import CommentAdmin from './CommentAdmin';
 
@@ -25,6 +26,8 @@ class Admin extends React.Component {
         return history.push('/admin/news');
       case 'comment':
         return history.push('/admin/comment');
+      case 'tag':
+        return history.push('/admin/tag');
     }
   }
 
@@ -38,6 +41,8 @@ class Admin extends React.Component {
         return ['news'];
       case '/admin/comment':
         return ['comment'];
+      case '/admin/tag':
+        return ['tag'];
     }
   }
 
@@ -51,6 +56,8 @@ class Admin extends React.Component {
         return '新闻管理';
       case '/admin/comment':
         return '评论管理';
+      case '/admin/tag':
+        return '分类管理';
     }
   }
 
@@ -62,6 +69,8 @@ class Admin extends React.Component {
         return <UserAdmin />;
       case '/admin/news':
         return <NewsAdmin />;
+      case '/admin/tag':
+        return <TagAdmin />;
       case '/admin/comment':
         return <CommentAdmin />;
     }
@@ -87,6 +96,10 @@ class Admin extends React.Component {
             <Menu.Item key="user">
               <Icon type="user" />
               <span className="nav-text">User</span>
+            </Menu.Item>
+            <Menu.Item key="tag">
+              <Icon type="file-text" />
+              <span className="nav-text">Tags</span>
             </Menu.Item>
             <Menu.Item key="news">
               <Icon type="video-camera" />
