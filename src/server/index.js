@@ -53,13 +53,21 @@ app.get('/api/tag', async (req, res) => {
     if (_.isUndefined(name)) {
         let isShow = req.query.isShow;
 
-        isShow = isShow === "1";
+        if (_.isUndefined(isShow)) {
+            const collection = await Tag
+                .find()
+                .skip(offset || 0)
+                .limit(limit || 20);
+            return res.send(collection.map(item => _.omit(item.toObject(), ['__v'])));
+        } else {
+            isShow = isShow === "1";
+            const collection = await Tag
+                .find({ isShow })
+                .skip(offset || 0)
+                .limit(limit || 20);
+            return res.send(collection.map(item => _.omit(item.toObject(), ['__v'])));
+        }
 
-        const collection = await Tag
-            .find({ isShow })
-            .skip(offset || 0)
-            .limit(limit || 20);
-        return res.send(collection.map(item => _.omit(item.toObject(), ['__v'])));
     }
 
     const item = await Tag.findOne({ name });
@@ -114,17 +122,29 @@ app.delete('/api/tag', async (req, res) => {
 app.get('/api/news', async (req, res) => {
     const {
         id,
+        tag,
         offset,
         limit,
     } = req.query;
 
     if (_.isUndefined(id)) {
-        const collection = await News
-            .find()
-            .sort({date: -1})
-            .skip(offset || 0)
-            .limit(limit || 20);
-        return res.send(collection);
+        if (_.isUndefined(tag)) {
+            const collection = await News
+                .find()
+                .sort({date: -1})
+                .skip(offset || 0)
+                .limit(limit || 20);
+            return res.send(collection);
+        } else {
+            const collection = await News
+                .find({
+                    keywords: tag,
+                })
+                .sort({date: -1})
+                .skip(offset || 0)
+                .limit(limit || 20);
+            return res.send(collection);
+        }
     }
 
     const item = await News.findById(id);

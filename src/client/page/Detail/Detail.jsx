@@ -13,6 +13,7 @@ export default class Detail extends React.Component {
             newObj: null,
             newList: [],
             comments: [],
+            tagsList: [],
         };
         this.splitId = this.splitId.bind(this);
     }
@@ -46,6 +47,15 @@ export default class Detail extends React.Component {
             })
 
         this.fetchComments(id);
+        this.fetchTags();
+    }
+
+    async fetchTags() {
+        const { data } = await axios.get(api + '/tag?isShow=1');
+
+        this.setState({
+            tagsList: data,
+        });
     }
 
     async fetchNews() {
@@ -73,11 +83,12 @@ export default class Detail extends React.Component {
             newObj,
             id,
             comments,
+            tagsList,
          } = this.state;
 
         return (
             <div className="detail">
-                <Nav />
+                <Nav tagsList={tagsList} />
                 <div className="news-content-wrapper">
                     <div className="news-content-right">
                         <SideBar sideBarList={newsList} />

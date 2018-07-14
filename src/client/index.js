@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, hashHistory } from "react-router-dom";
 import { Provider } from 'react-redux';
 import store from './store';
 import Home from 'Page/Home';
+import Tag from 'Page/Tag';
 import Detail from 'Page/Detail';
 import Manager from 'Page/Manager';
 import Login from 'Page/Login';
@@ -22,6 +23,7 @@ ReactDOM.render(
                     <Route path="/detail/:_id" component={Detail} />
                 </Route>
                 <Route path="/manager" component={Manager} />
+                <Route path="/tag/:name" component={Tag} />
                 <Route path="/login" component={Login}/>
                 <Route path="/register" component={Register}/>
                 <Route path="/admin" exact component={Admin} />
