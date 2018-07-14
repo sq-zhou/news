@@ -51,8 +51,12 @@ app.get('/api/tag', async (req, res) => {
     } = req.query;
 
     if (_.isUndefined(name)) {
+        let isShow = req.query.isShow;
+
+        isShow = isShow === "1";
+
         const collection = await Tag
-            .find()
+            .find({ isShow })
             .skip(offset || 0)
             .limit(limit || 20);
         return res.send(collection.map(item => _.omit(item.toObject(), ['__v'])));

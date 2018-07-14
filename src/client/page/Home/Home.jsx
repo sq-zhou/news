@@ -9,12 +9,14 @@ export default class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            newsList: []
+            newsList: [],
+            tagsList: [],
         };
     }
 
     componentDidMount() {
         this.fetchNews();
+        this.fetchTags();
     }
 
     async fetchNews() {
@@ -25,11 +27,19 @@ export default class Home extends React.Component {
         });
     }
 
+    async fetchTags() {
+        const { data } = await axios.get(api + '/tag?isShow=1');
+
+        this.setState({
+            tagsList: data,
+        });
+    }
+
     render() {
-        const { newsList } = this.state;
+        const { newsList, tagsList } = this.state;
         return (
             <div className="home">
-                <Nav />
+                <Nav tagsList={tagsList} />
                 <div className="news-content-wrapper">
                     <div className="news-content-right">
                         <SideBar sideBarList={newsList}/>
