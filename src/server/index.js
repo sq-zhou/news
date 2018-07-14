@@ -55,28 +55,51 @@ app.get('/api/tag', async (req, res) => {
             .find()
             .skip(offset || 0)
             .limit(limit || 20);
-        return res.send(collection);
+        return res.send(collection.map(item => _.omit(item.toObject(), ['__v'])));
     }
 
     const item = await Tag.findOne({ name });
     res.send(item);
 });
 
-app.put('/api/tag', async (req, res) => {
-    const { name, ...rest } = req.body;
+app.post('/api/tag', async (req, res) => {
+    const { name, description } = req.body;
+    await Tag.create({
+        name,
+        description,
+        isShow: false,
+    });
 
-    if (_.isUndefined(name)) {
+    res.send({
+        message: 'success',
+    });
+});
+
+app.put('/api/tag', async (req, res) => {
+    const { _id, ...rest } = req.body;
+
+    if (_.isUndefined(_id)) {
         return res.status(404).send({
-            message: '缺少 name',
+            message: '缺少 _id',
         });
     }
     
     await Tag.findOneAndUpdate(
-        { name },
+        { _id },
         rest,
     );
 
     res.send({
+        message: 'success',
+    });
+})
+
+app.delete('/api/tag', async (req, res) => {
+    const { _id } = req.query;
+
+    await Tag.deleteOne({ _id });
+    
+    return res.send({
         message: 'success',
     });
 })

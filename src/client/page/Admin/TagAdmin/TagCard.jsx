@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Card, Button, Input, Form } from 'antd';
+import { Card, Button, Input, Form, Checkbox } from 'antd';
 import axios from 'Config/axios';
 
 const FormItem = Form.Item;
@@ -16,20 +16,16 @@ class TagCard extends React.Component {
   static getDerivedStateFromProps(nextProps, prevState) {
     const {
       _id,
-      content,
-      date,
-      userId,
-      newsId,
-      user,
+      name,
+      isShow,
+      description,
     } = nextProps;
 
     return {
       _id,
-      content,
-      date,
-      userId,
-      newsId,
-      user,
+      name,
+      isShow,
+      description,
       ...prevState,
     };
   }
@@ -39,9 +35,49 @@ class TagCard extends React.Component {
 
     const { _id } = this.state;
 
-    await axios.delete(`/api/comment?_id=${_id}`);
+    await axios.delete(`/api/tag?_id=${_id}`);
 
-    this.props.onDelete && this.props.onDelete();
+    this.props.onUpdate && this.props.onUpdate();
+  }
+
+  updateComment = async e => {
+    e.preventDefault();
+
+    const {
+      _id,
+      name,
+      isShow,
+      description,
+    } = this.state;
+
+    await axios.put('/api/tag', {
+      _id,
+      name,
+      isShow,
+      description,
+    });
+
+    alert('更新成功');
+
+    this.props.onUpdate && this.props.onUpdate();
+  }
+
+  handleNameInput = e => {
+    this.setState({
+      name: e.target.value,
+    });
+  }
+
+  handleIsShow = e => {
+    this.setState({
+      isShow: e.target.checked,
+    });
+  }
+
+  handleDescriptionInput = e => {
+    this.setState({
+      description: e.target.value,
+    });
   }
 
   render() {
@@ -57,30 +93,40 @@ class TagCard extends React.Component {
     };
 
     const {
-      content,
-      user
+      name,
+      isShow,
+      description, 
     } = this.state;
 
     return (
       <Card
         type="inner"
-        title={content.slice(0, 15)}
+        title={name}
         extra={
-          <Button onClick={this.deleteComment} size="small" type="danger">删除</Button>
+          <div>
+            <Button onClick={this.updateComment} size="small" type="default">更新</Button>
+            <Button onClick={this.deleteComment} size="small" type="danger">删除</Button>
+          </div>
         }
       >
         <Form>
           <FormItem
             {...formItemLayout}
-            label="作者"
+            label="名字"
           >
-            <Input disabled defaultValue={user.username} />
+            <Input value={name} onChange={this.handleNameInput} />
           </FormItem>
           <FormItem
             {...formItemLayout}
-            label="内容"
+            label="是否展示"
           >
-            <TextArea disabled defaultValue={content} />
+            <Checkbox checked={isShow} onChange={this.handleIsShow} />
+          </FormItem>
+          <FormItem
+            {...formItemLayout}
+            label="描述"
+          >
+            <TextArea value={description || ''} onChange={this.handleDescriptionInput} />
           </FormItem>
         </Form>
       </Card>

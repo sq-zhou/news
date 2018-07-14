@@ -5,6 +5,7 @@ const TagScheme = mongoose.Schema({
     type: String,
     require: true,
   },
+  isShow: Boolean,
   description: String,
 });
 
