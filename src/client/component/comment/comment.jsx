@@ -69,8 +69,7 @@ export default class Comment extends React.Component {
             <div className="new">
                 <div className="new-publish">
                     <span className="publisher one">{ author.username }</span>
-                    <span className="response">回复</span>
-                    <span className="publisher two">zhousq</span>
+                    {/* <span className="response">回复</span> <span className="publisher two">zhousq</span> */}
                     <span className="time">{ getDateDiff(new Date(date)) }</span>
                 </div>
                 <div className="content">

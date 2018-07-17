@@ -41,6 +41,8 @@ class CommentCard extends React.Component {
 
     await axios.delete(`/api/comment?_id=${_id}`);
 
+    alert('删除成功');
+
     this.props.onDelete && this.props.onDelete();
   }
 

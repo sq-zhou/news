@@ -4,6 +4,8 @@ import UserAdmin from './UserAdmin';
 import TagAdmin from './TagAdmin';
 import NewsAdmin from './NewsAdmin';
 import CommentAdmin from './CommentAdmin';
+import axios from 'Config/axios';
+import api from 'Config/api';
 
 import './styles.scss'
 
@@ -13,6 +15,21 @@ class Admin extends React.Component {
 
   constructor(props) {
     super(props);
+  }
+
+  componentDidMount() {
+    this.fetchUser();
+  }
+
+  async fetchUser() {
+      try {
+          const resp = await axios.get(api + "/user/me");
+          const user = resp.data;
+      } catch (e) {
+        console.error(e);
+        alert('你不是管理员!');
+        window.location.href = "/";
+      };
   }
 
   handleMenuClick = e => {

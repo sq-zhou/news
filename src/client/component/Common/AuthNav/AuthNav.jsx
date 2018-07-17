@@ -26,6 +26,11 @@ export default class AuthNav extends React.Component {
         };
     }
 
+    fetchLogout = async () => {
+        await axios.post(api + "/logout");
+        alert("登出成功");
+    }
+
     render() {
         const { user } = this.props;
         let showInfo;
@@ -40,6 +45,9 @@ export default class AuthNav extends React.Component {
             showInfo = (
                 <div className="login-nav">
                     <span>已登陆： { user.username }</span>
+                    &nbsp;
+                    &nbsp;
+                    <span onClick={this.fetchLogout}>登出</span>
                 </div>
             )
         }

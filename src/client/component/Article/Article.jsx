@@ -43,6 +43,8 @@ export default class Article extends React.Component {
         this.setState({
             commentInputValue: '',
         });
+
+        this.props.onSubmit && this.props.onSubmit();
     }
 
     get submitForm() {

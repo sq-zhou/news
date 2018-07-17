@@ -55,7 +55,7 @@ app.get('/api/tag', async (req, res) => {
 
         if (_.isUndefined(isShow)) {
             const collection = await Tag
-                .find()
+                .find({ isShow })
                 .skip(offset || 0)
                 .limit(limit || 20);
             return res.send(collection.map(item => _.omit(item.toObject(), ['__v'])));
@@ -222,8 +222,11 @@ app.get('/api/comment', async (req, res) => {
             const comment = collection[i].toObject();
             const { userId, newsId, __v, ...rest } = comment;
             const user = await User.findById(userId);
+            if (user === null) {
+                continue;
+            }
             result.push({
-                author: _.pick(user.toObject(), ['username', 'createAt']),
+                author:  _.pick(user.toObject(), ['username', 'createAt']),
                 ...rest,
             });
         }
@@ -243,6 +246,9 @@ app.get('/api/comment', async (req, res) => {
     for (let i = 0; i < comments.length; i++) {
         const comment = comments[i];
         const user = await User.findById(comment.userId);
+            if (user === null) {
+                continue;
+            }
         result.push({
             ...comment,
             user: _.omit(user.toObject(), ['password', '__v']),

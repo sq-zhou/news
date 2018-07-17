@@ -98,6 +98,7 @@ export default class Detail extends React.Component {
                             newObj={newObj}
                             id={id}
                             comments={comments}
+                            onSubmit={() => this.fetchComments(id)}
                         />
                     </div>
                 </div>
